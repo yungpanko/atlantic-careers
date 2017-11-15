@@ -1,9 +1,9 @@
 class Job < ApplicationRecord
   belongs_to :company
   has_many :applications
-  has_many :applicants, class_name:"User", through: :applications
+  has_many :applicants, class_name:"User", through: :applications, source: :user
 
-  validates :name, presence: true
+  validates :title, presence: true
   validates :company, presence: true
   validates :link, presence: true
 

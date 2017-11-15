@@ -11,13 +11,16 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  def test
+    render :test
+  end
+
   def create
     @user = User.new(user_params)
     # respond_to do |format|
       if @user.save
         session[:user_id] = @user.id
-        UserMailer.welcome_email(@user).deliver_now
-        redirect_to items_path
+        redirect_to root_path
       else
         flash.now[:danger] = []
         @user.errors.full_messages.each do |error|
@@ -29,7 +32,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @reviews = @user.reviews
   end
 
   def edit

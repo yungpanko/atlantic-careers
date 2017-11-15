@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
     @user = User.find_by(name: params[:user][:name])
     if @user && @user.authenticate(params[:user][:password])
       session[:user_id] = @user.id
-      redirect_back_or_default(items_path)
+      redirect_back_or_default(root_path)
     else
       @user = User.new
       flash.now[:danger] = "Login unsuccessful. Please try again"

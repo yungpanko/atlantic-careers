@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
+  resources :applications
+  resources :jobs
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  root "users#test"
+  root "companies#index"
   get "/login" => "sessions#new", as: :login
   post "/login" => "sessions#create", as: :sessions
   get "/users/new" => "users#new", as: :signup
@@ -12,4 +14,7 @@ Rails.application.routes.draw do
   put "/users/:id" => "users#update"
   patch "/users/:id" => "users#update"
   delete "/logout" => "sessions#destroy"
+
+  resources :companies
+
 end

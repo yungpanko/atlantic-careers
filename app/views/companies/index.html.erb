@@ -1,1 +1,15 @@
-Company Index
+
+<h1>All Companies</h1>
+<%= link_to "Create New Company", new_company_path, class:'btn btn-primary' %>
+<br />
+<br />
+<% @sorted = @companies.sort_by {|company| company.name} %>
+<% @sorted.each do |company| %>
+<li>
+  <%= link_to (company.name.titleize), company_path(company), class:'' %>
+  <%= '(' + company.jobs.count.to_s + ')' %>
+  <% if @current_user.admin? %>
+  <%= link_to "Delete Company", company, :method => :delete, :confirm => "Are you sure?", class:'btn btn-danger btn-sm' %>
+  <% end %>
+</li>
+<% end  %>

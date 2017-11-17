@@ -36,6 +36,8 @@ ActiveRecord::Schema.define(version: 20171115033656) do
     t.string "title"
     t.string "link"
     t.date "deadline"
+    t.string "location"
+    t.integer "creator_id"
     t.bigint "company_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

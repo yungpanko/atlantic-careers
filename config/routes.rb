@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   put "/users/:id" => "users#update"
   patch "/users/:id" => "users#update"
   delete "/logout" => "sessions#destroy"
+  delete "/users/:id" => "users#destroy"
 
   resources :companies
 

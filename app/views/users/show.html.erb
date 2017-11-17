@@ -2,7 +2,7 @@
   <div class="col-md-6 col-md-6">
     <div class="panel panel-default">
       <div class="panel-body">
-        <div class="col-md-6">
+        <!-- <div class="col-md-6">
           <div class="thumbnail">
             <% if @user.avatar? %>
               <%= image_tag(@user.avatar_url) %>
@@ -10,11 +10,19 @@
               <%= image_tag('default_avatar.png') %>
             <% end %>
           </div>
-        </div>
+        </div> -->
         <div class="col-md-6">
           <h1><%= @user.name %></h1>
         </div>
         <div class="col-md-12">
+          <h3>Saved Jobs:</h3>
+          <% @user.applications.each do |app| %>
+          <li>
+          <%= app.job.company.name %>
+          <%= link_to (app.job.title.titleize), "#{app.job.link}", class:'' %>
+          <%= link_to "Unsave", app, :method => :delete, :confirm => "Are you sure?", class:'btn btn-danger btn-sm' %>
+        </li>
+          <% end %>
         </div>
       </div>
     </div>

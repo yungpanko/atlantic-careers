@@ -4,7 +4,9 @@ class CreateJobs < ActiveRecord::Migration[5.1]
       t.string :title
       t.string :link
       t.date :deadline
-      t.references :company, foreign_key: true
+      t.string :location
+      t.integer :creator_id, foreign_key: true, on_delete: :cascade
+      t.references :company, foreign_key: true, on_delete: :cascade
 
       t.timestamps
     end

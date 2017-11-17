@@ -5,9 +5,12 @@ class CompaniesController < ApplicationController
 
   def index
     @companies = Company.all
+    @current_user = current_user
   end
 
   def show
+    @company = Company.find(params[:id])
+    @current_user = current_user
   end
 
   def new
@@ -16,10 +19,16 @@ class CompaniesController < ApplicationController
 
   def create
     @company = Company.new(company_params)
-    @company.creator = current_user.id
+    @company.creator = current_user
     if @company.valid?
       @company.save
       redirect_to company_path(@company)
+    else
+      flash.now[:danger] = []
+      @company.errors.full_messages.each do |error|
+        flash.now[:danger] << error
+      end
+      render :new
     end
   end
 
@@ -35,6 +44,7 @@ class CompaniesController < ApplicationController
   end
 
   def destroy
+    @company = Company.find(params[:id])
     @company.destroy
     redirect_to companies_path
   end

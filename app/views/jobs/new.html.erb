@@ -24,12 +24,12 @@
         </div>
         <% if params[:format] %>
         <div class="form-group">
-          <%= f.label :company_id, class:'control-label' %>
+          <!-- <%= f.label :company_id, class:'control-label' %> -->
           <%= f.hidden_field :company_id, :value => params[:format], class:'form-control' %>
         </div>
         <% else %>
         <div class="form-group">
-          <%= f.label :company_id, class:'control-label' %>
+          <!-- <%= f.label :company_id, class:'control-label' %> -->
           <%= f.hidden_field :company_id, :value => @company.id, class:'form-control' %>
         </div>
         <% end %>

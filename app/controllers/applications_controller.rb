@@ -18,7 +18,7 @@ class ApplicationsController < ApplicationController
           flash.now[:danger] << error
         end
     end
-    redirect_to company_path(Company.find(job.company.id))
+    redirect_back(fallback_location: root_path)
   end
 
   def destroy

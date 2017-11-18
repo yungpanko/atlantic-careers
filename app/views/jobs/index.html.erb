@@ -1,0 +1,23 @@
+
+<h1>All Jobs</h1>
+<br />
+<% @sorted = @jobs.sort_by {|job| job.created_at} %>
+<% @sorted.reverse.each do |job| %>
+<% if !job.link.include? "http" %>
+<% job.link = 'http://' + job.link %>
+<% end %>
+<li>
+  <%= job.company.name.titleize %>
+  <%= link_to (job.title.titleize), "#{job.link}", class:'' %>
+  (<%= job.location.upcase %>)
+  <% if job.deadline? %>
+  *Deadline:
+  <%= job.deadline.strftime("%b %d %Y") %>*
+  <% end %>
+  <%= link_to "Save", applications_path(job: job, user: @current_user), :method => :post, class:'btn btn-success btn-sm' %>
+  <% if @current_user.admin? %>
+  <%= link_to "Delete Job", job, :method => :delete, :confirm => "Are you sure?", class:'btn btn-danger btn-sm' %>
+  <% end %>
+</li>
+<br/>
+<% end %>

@@ -10,6 +10,8 @@ end
 
 
 gem 'city-state'
+gem 'newrelic_rpm'
+
 
 # gem 'carrierwave', '~> 1.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

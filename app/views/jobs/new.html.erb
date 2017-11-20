@@ -6,6 +6,19 @@
       </div>
       <div class="panel-body">
         <%= form_for(@job) do |f| %>
+        <% if params[:format] %>
+        <div class="form-group">
+          <%= f.hidden_field :company_id, :value => params[:format], class:'form-control' %>
+        </div>
+        <% else %>
+        <div class="form-group">
+          <%= f.label :company_id, class:'control-label' %>
+          <%= f.select :company_id, @companies.collect {|company| [company.name.titleize, company.id] }, class:'form-control' %>
+          <p>
+            <%= link_to "Company not listed? Add it here", new_company_path %>
+          </p>
+        </div>
+        <% end %>
         <div class="form-group">
           <%= f.label :title, class:'control-label' %>
           <%= f.text_field :title, class:'form-control' %>
@@ -22,17 +35,6 @@
           <%= f.label :deadline, class:'control-label' %>
           <%= f.date_field :deadline, class:'form-control' %>
         </div>
-        <% if params[:format] %>
-        <div class="form-group">
-          <!-- <%= f.label :company_id, class:'control-label' %> -->
-          <%= f.hidden_field :company_id, :value => params[:format], class:'form-control' %>
-        </div>
-        <% else %>
-        <div class="form-group">
-          <!-- <%= f.label :company_id, class:'control-label' %> -->
-          <%= f.hidden_field :company_id, :value => @company.id, class:'form-control' %>
-        </div>
-        <% end %>
         <div class="form-group">
           <%= f.submit "Create Job", class:'btn btn-primary'%>
         </div>

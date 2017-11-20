@@ -7,7 +7,10 @@
 <% @sorted.each do |company| %>
 <li>
   <%= link_to (company.name.titleize), company_path(company), class:'' %>
-  <%= '(' + company.jobs.count.to_s + ')' %>
+  <!-- <%= '(' + company.jobs.count.to_s + ')' %> -->
+  <% if company.jobs.where('updated_at > ?', 72.hours.ago).count > 0 %>
+  <mark>NEW JOBS</mark>
+  <% end %>
   <% if @current_user.admin? %>
   <%= link_to "Delete", company, :method => :delete, :confirm => "Are you sure?", class:'btn btn-danger btn-sm' %>
   <% end %>

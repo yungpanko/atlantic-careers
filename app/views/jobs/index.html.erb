@@ -1,7 +1,10 @@
 
 <h1>All Jobs</h1>
+<%= link_to "Create New Job", new_job_path, class:'btn btn-primary' %>
+<br />
 <br />
 <% @sorted = @jobs.sort_by {|job| job.created_at} %>
+<% @sorted = @sorted.select {|job| job.deadline == nil || job.deadline > Time.now} %>
 <% @sorted.reverse.each do |job| %>
 <% if !job.link.include? "http" %>
 <% job.link = 'http://' + job.link %>
@@ -13,6 +16,9 @@
   <% if job.deadline? %>
   *Deadline:
   <%= job.deadline.strftime("%b %d %Y") %>*
+  <% end %>
+  <% if job.created_at > 72.hours.ago %>
+  <mark>NEW</mark>
   <% end %>
   <%= link_to "Save", applications_path(job: job, user: @current_user), :method => :post, class:'btn btn-success btn-sm' %>
   <% if @current_user.admin? %>

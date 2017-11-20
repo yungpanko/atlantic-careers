@@ -13,7 +13,7 @@ class JobsController < ApplicationController
 
   def new
     @job = Job.new
-    @companies = Company.all
+    @companies = Company.all.sort_by {|company| company.name}
   end
 
   def create
@@ -33,7 +33,7 @@ class JobsController < ApplicationController
         flash.now[:danger] << error
       end
       @company = @job.company
-      @companies = Company.all
+      @companies = Company.all.sort_by {|company| company.name}
       render :new
     end
   end
